@@ -13,11 +13,12 @@ output_file = sys.argv[2]
 data_frame = pd.read_csv(input_file, header=None, skiprows=[0,1,2,16,17,18])
 # 특정행을 삭제할 때 사용이 되는 drop함수이다. 
 # data_frame = data_frame.drop([0,1,20,16,17,18])
-# 첫번쨰 행의 값을 추가 
-# iloc 속성은 행번호를 통해 행 데이터를 가져옵니다. 
+# 첫번쨰 행의 값을 추가 데이터의 목록인 헤더로 설정을 해주는 것이다.
+# iloc 속성은 행번호를 통해 행 데이터를 가져옵니다.
 data_frame.columns = data_frame.iloc[0]
 # 인덱스를 다시 설정하기 위한 함수 
 # reindex함수는 재 색인을 하는 함수이다. 현재 데이터의 index 0번을 삭제하고 재 색인 진행
+# 0번째 행은 표의 목록으로 설정을 하였으므로 삭제를 해준다.
 data_frame = data_frame.reindex(data_frame.index.drop(0))
 # 가공된 데이터를 엑셀파일 써서 저장
 data_frame.to_csv(output_file, index=False)
