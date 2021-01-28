@@ -24,6 +24,7 @@ for input_file in glob.glob(os.path.join(input_path, 'sales_*.csv')):
             # 행의 숫자 증가
             row_counter += 1
     # 파일의 행과 열을 파악하기 위한 출력 
+    # os.path.basename() 함수는 전체 경로명의 마지막 요소를 추출하는 함수
     print('{0!s}: \t{1:d} rows \t {2:d} columns'.format(os.path.basename(input_file), row_counter, len(header)))
     # 파일의 숫자를 세기 위한 변수 증가
     file_counter += 1
