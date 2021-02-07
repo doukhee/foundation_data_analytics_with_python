@@ -14,7 +14,7 @@ all_files = glob.glob(os.path.join(input_path, 'sales_*.csv'))
 all_data_frames = []
 # 파일을 읽어오기 위한 반복문
 for file in all_files:
-    # 인덱스를 설정하는 열이 없다고 설정하여 파일 읽어오기
+    # 인덱스를 설정한 열이 없다고 설정하여 파일 읽어오기
     # index_col=None은 default 특정 행을 설정을 하고 싶을 경우 index_col=로 설정해준다.
     data_frame = pd.read_csv(file, index_col=None)
     # 전체 데이터를 저장할 배열에 추가하여 읽어온 데이터를 추가한다
