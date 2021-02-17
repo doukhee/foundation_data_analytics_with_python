@@ -10,9 +10,9 @@ fig, axes = plt.subplots(nrows=1, ncols=2)
 # 상위 그래프와 하위 그래프로 나누어서 변수 지정
 # ravel() 분배해주는 함수?
 ax1, ax2 = axes.ravel()
-# pandas의 dataFrame 형태의 데이터를 박스 그래프로 변경
+# 데이터 생성
 data_frame = pd.DataFrame(np.random.rand(5, 3), index=['Customer 1', 'Customer 2', 'Customer 3', 'Customer 4', 'Customer 5'], columns=pd.Index(['Metric 1', 'Metric 2', 'Metric 3'], name='Metics'))
-# 막대 그래프 생성
+# pandas의 dataFrame 형태의 데이터를 막대 그래프로 변경
 data_frame.plot(kind='bar', ax=ax1, alpha=0.75, title='Bar Plot')
 # 차트의 라벨 속성 변경
 # setp()는 차트의 속성을 변경하는 함수이다
