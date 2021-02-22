@@ -122,3 +122,25 @@ print("\nAdj. R-squared:\n%.2f" % lm.rsquared_adj)
 print("\nF-statistic: %.1f  P-value: %.2f" % (lm.fvalue, lm.f_pvalue))
 # 모든 적합값을 표시하는 대신 관측값의 개수와 적합값의 개수를 각각 lm.nobs와 len(lm.fittedvalues)로 출력
 print("\nNumber of obs: %d  Number of fitted values: %s" % (lm.nobs, len(lm.fittedvalues)))
+# 와인의 quality만 가져와서 변수에 저장
+dependent_variable = wine['quality']
+# wine 데이터에서 quality, type, in_sample을 제외한 값을 가져와서 변수로 저장
+independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sample'])]
+# 데이터 표준화
+independent_variables_standardized = (independent_variables - independent_variables.mean()) / independent_variables.std()
+# 데이터를 연결
+wine_standardized = pd.concat([dependent_variable, independent_variables_standardized], axis=1)
+# 최소 제곱법으로 회귀 모형을 사용하여 분석
+lm_standardized = ols(my_formula, data=wine_standardized).fit()
+# 비교를 위한 출력
+print("{}\r\n".format(lm.summary()))
+# 회귀 분석의 결과를 요약한 것을 출력
+print(lm_standardized.summary())
+# 기존의 데이터 셋의 첫 10개 값을 가지고, '새로운' 관측값 데이터 셋을 만든다
+new_observations = wine.loc[wine.index.isin(range(10)), independent_variables.columns]
+# 기존의 최소제곱법으로 학습한 데이터를 가지고, 새로운 관측값을 예측한다
+y_predicted = lm.predict(new_observations)
+# 예측 값을 소수점 2자리까지 보여주기 위해 반올림한 값을 저장
+y_predicted_rounded = [round(score, 2) for score in y_predicted]
+# 확인을 위한 출력
+print(y_predicted_rounded)
